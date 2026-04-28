@@ -33,7 +33,10 @@ See [`docs/decisions.md`](docs/decisions.md) for the full reasoning behind the w
 
 ## Status
 
-🚧 Pre-MVP. Concierge validation phase.
+🚧 Phase 0 — Concierge MVP ready to deploy. Asset prompts + framework
+references written; Claude Project setup guide in
+[`docs/concierge-setup.md`](docs/concierge-setup.md). Design-partner
+outreach variants in [`docs/outreach/dm-variants.md`](docs/outreach/dm-variants.md).
 
 | Phase | Window | Goal |
 |---|---|---|

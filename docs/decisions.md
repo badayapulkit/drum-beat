@@ -6,6 +6,54 @@ decisions go at the top.
 
 ---
 
+## 2026-04-28 — Concierge MVP runs on Claude Projects, not custom code
+
+**Decision.** Phase 0 validation runs on Claude.ai Projects: a single
+system instruction (`templates/prompts/system-instructions.md`) plus 14
+uploaded knowledge files (3 workflow prompts + 6 asset prompts + 4
+framework references + 1 brief intake spec). No app code in Phase 0.
+
+**Considered.**
+- *Custom Streamlit / Next.js prototype.* Faster iteration on UX, but
+  takes 3–5 days to build and validates UX, not the workflow itself.
+- *Claude Project (chosen).* 10-minute setup, zero code, validates the
+  *workflow* (which is what's risky), gives every design-partner session
+  a consistent operator experience.
+- *Direct ChatGPT / claude.ai chat with prompts pasted in.* No
+  knowledge attachment, harder to keep methodology consistent across
+  sessions.
+
+**Why.** Phase 0 risk is "does this workflow actually solve PMM pain?",
+not "is the UI good?" Claude Projects let us test the workflow at zero
+cost. UX validation comes in Phase 1 with the real app.
+
+**Tradeoff accepted.** No telemetry on what design partners do with the
+output (no edit-tracking, no asset reuse data) — we collect feedback
+manually in sessions instead. Acceptable at 5–10 sessions.
+
+---
+
+## 2026-04-28 — Asset prompt files double as Phase 1 spec
+
+**Decision.** The 6 asset prompts in `templates/prompts/assets/` are
+written to be used both (a) as Claude Project knowledge in Phase 0 and
+(b) as direct ports to TypeScript prompt code in Phase 1. Each asset
+prompt includes inputs, output structure, length targets, tone rules,
+quality criteria, and common failure modes — everything the Phase 1
+backend needs.
+
+**Why.** Single source of truth for asset quality. When a design
+partner says "the blog post is too marketing-y," we update the
+`blog-draft.md` prompt — and that change automatically applies to both
+Phase 0 (re-uploaded to Claude Project) and Phase 1 (re-imported into
+TS).
+
+**Tradeoff accepted.** Slightly more verbose prompt files than strictly
+necessary for Phase 0 alone. Worth it to avoid divergence between Phase
+0 prompts and Phase 1 implementation.
+
+---
+
 ## 2026-04-28 — Wedge: Launch Workflows (not battlecards, not win/loss)
 
 **Decision.** The first product Drumbeat ships is a launch-workflow tool.
